@@ -2,7 +2,7 @@ let id = 0
 
 // chat history
 const MessageList = ({state}) => {
-  let messages = state.data;
+  let messages = state.messages;
   let typing = state.typing;
 
   const list = messages.map((message) => {
@@ -52,7 +52,7 @@ class ChatApp extends React.Component {
     super(props);
     // set initial state
     this.state = {
-      data: [],
+      messages: [],
       typing: false
     }
   }
@@ -61,10 +61,9 @@ class ChatApp extends React.Component {
     // Assemble data
     const message = {sender:sender, text: val, id: id++}
     // Update data
-    let messages = this.state.data
-    messages.push(message);
+    this.state.messages.push(message);
     // Update state
-    this.setState({data: this.state.data});
+    this.setState({messages: this.state.messages});
   }
 
   sendTyping(sender) {
