@@ -1,29 +1,40 @@
 let id = 0
 
 // chat history
-const MessageList = ({state}) => {
+const MessageList = ({sender, state}) => {
   let messages = state.messages;
   let typing = state.typing;
+
+  // classname for final li
+  let typingClass = typing && typing !== sender ? 'elipses typing' : 'elipses'
 
   const list = messages.map((message) => {
     return (<li key={message.id}>{message.sender} {message.text}</li>)
   });
 
-  return (<ul>{list}</ul>);
+  return (
+    <ul>
+      {list}
+      <li className={typingClass}>...</li>
+    </ul>
+  );
 }
 
 // text input
 const MessageForm = ({sendMessage, sendTyping, sender}) => {
   let input;
 
+  let handleChange = () => {
+    sendTyping(sender)
+  }
+
   return (
     <div>
-      <input ref={node => {
+      <input onChange={handleChange} ref={node => {
         input = node;
       }} />
       <button onClick={() => {
         sendMessage(input.value, sender);
-        sendTyping(sender);
         input.value = '';
       }}>
         +
@@ -34,12 +45,10 @@ const MessageForm = ({sendMessage, sendTyping, sender}) => {
 
 // single-user chat window
 const ChatWindow = ({sender, sendMessage, sendTyping, state}) => {
-  let senderIsTyping = sender === state.typing
-
   return (
     <div>
       <div>{sender}</div>
-      <MessageList state={state} />
+      <MessageList sender={sender} state={state} />
       <MessageForm sendMessage={sendMessage} sendTyping={sendTyping} sender={sender} />
     </div>
   )
@@ -53,6 +62,7 @@ class ChatApp extends React.Component {
     // set initial state
     this.state = {
       messages: [],
+      // either false or name of sender
       typing: false
     }
   }
