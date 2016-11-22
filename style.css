@@ -15,7 +15,6 @@ html {
 }
 
 .chat-outer {
-  flex: 1 0 50%;
   height: 100%;
   padding: 10px;
   box-sizing: border-box;

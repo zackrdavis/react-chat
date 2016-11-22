@@ -1,3 +1,9 @@
+let users = [
+  'Laura',
+  'Rob',
+  //'Jim'
+]
+
 // coordinates ChatWindow-ChatWindow or ChatWindow-Server
 class ChatApp extends React.Component {
   constructor(props) {
@@ -5,11 +11,7 @@ class ChatApp extends React.Component {
     super(props);
     // set initial state
     this.state = {
-      users: [
-        'Laura',
-        'Rob',
-        // 'Jim'
-      ],
+      users: users,
       messages: [],
       suggestions: {},
       // either false or name of user
@@ -194,8 +196,9 @@ const SuggestionList = ({sendMessage, suggestions, user}) => {
 
 // single-user chat window
 const ChatWindow = ({user, sendMessage, sendTyping, state}) => {
+  let windowStyle = {flex: '1 0 ' + (100 / state.users.length) + '%'}
   return (
-    <div className="chat-outer">
+    <div className="chat-outer" style={windowStyle}>
       <div className="chat-inner">
         <div className="chat-header">{user}</div>
         <MessageList user={user} state={state} />
