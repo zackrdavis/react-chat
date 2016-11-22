@@ -5,12 +5,17 @@ html, body, #chat-app, #chat-app > div{
   padding: 0;
 }
 
+html {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1px;
+}
+
 #chat-app > div {
   display: flex;
 }
 
 .chat-outer {
-  flex: 1 0 auto;
+  flex: 1 0 50%;
   padding: 10px;
   box-sizing: border-box;
 }
@@ -18,18 +23,60 @@ html, body, #chat-app, #chat-app > div{
 .chat-inner {
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
   height: 100%;
   box-shadow: 2px 2px 10px black;
+  border-radius: 5px;
+  border: 2px solid orange;
+  font-size: 20rem;
 }
 
-.chat-header, .message-form, .suggestion-list {
+.chat-header {
   flex: 0 1 auto;
+  padding: 15px;
+  border-bottom: 2px solid orange;
 }
 
 .message-list {
-  flex: 1 0 auto;
-  border: 1px solid red;
+  flex: 1 1 auto;
+  padding: 15px;
   overflow: auto;
+}
+
+.message-form {
+  padding: 15px;
+}
+
+.message-form-inner {
+  display: flex;
+  flex: 0 1 auto;
+  border: 2px solid orange;
+  border-radius: 5px;
+}
+
+input, button {
+  font-family: 'Roboto', sans-serif;
+  font-size: 20rem;
+  border: 0;
+
+}
+
+input {
+  flex: 1 0 auto;
+  height: 50px;
+  padding-left: 10px;
+  border-radius: 5px;
+}
+
+button {
+  flex: 0 1 50px;
+  background-color: rgba(0,0,0,0);
+  border-left: 2px solid orange;
+}
+
+.suggestion-list {
+  flex: 0 1 25%;
+  padding: 15px;
 }
 
 .elipses {

@@ -31,15 +31,17 @@ const MessageForm = ({sendMessage, sendTyping, user}) => {
 
   return (
     <div className="message-form">
-      <input onChange={handleChange} ref={node => {
-        input = node;
-      }} />
-      <button onClick={() => {
-        sendMessage(input.value, user);
-        input.value = '';
-      }}>
+      <div className="message-form-inner">
+        <input onChange={handleChange} ref={node => {
+          input = node;
+        }} />
+        <button onClick={() => {
+          sendMessage(input.value, user);
+          input.value = '';
+        }}>
         +
-      </button>
+        </button>
+      </div>
     </div>
   )
 }
@@ -107,16 +109,22 @@ class ChatApp extends React.Component {
   }
 
   consultBot(user, message) {
-    this.bot.ask(message, (err, response) => {
-      this.state.suggestions[user] = []
-      // push the bot answer
-      this.state.suggestions[user].push(response);
-      // push another helpful answer
-      this.state.suggestions[user].push('One moment while I consult my manager...');
-      // set state
-      this.setState({ suggestions: this.state.suggestions })
+    // TODO: error handling
+    this.bot.ask(message, (err, firstResponse) => {
+      this.bot.ask(message, (err, secondResponse) => {
+        this.state.suggestions[user] = []
+        // push first response
+        this.state.suggestions[user].push(firstResponse);
+        // push second response only if it's unique
+        if(secondResponse !== firstResponse) {
+          this.state.suggestions[user].push(secondResponse);
+        }
+        // push another helpful answer
+        this.state.suggestions[user].push('One moment while I consult my manager...');
+        // set state
+        this.setState({ suggestions: this.state.suggestions })
+      })
     });
-
   }
 
 
