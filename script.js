@@ -108,7 +108,7 @@ class ChatApp extends React.Component {
       users: [
         'Laura',
         'Rob',
-        //'Jim'
+        // 'Jim'
       ],
       messages: [],
       suggestions: {},
