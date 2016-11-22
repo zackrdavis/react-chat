@@ -118,7 +118,9 @@ const MessageList = ({user, state}) => {
 
   const list = messages.map((message) => {
     // left or right side depending on sender/receiver
-    let youMeClass = user === message.user ? 'self message' : 'other message';
+    let youMeClass = user === message.user ? 'self' : 'other';
+    let newestClass = message.id === messages.length - 1 ? 'newest' : '';
+    let messageClass = [youMeClass, newestClass, 'message'].join(' ')
 
     // hide username if they sent multiple messages in a row
     let userNameClass;
@@ -129,7 +131,7 @@ const MessageList = ({user, state}) => {
     }
 
     return (
-      <div key={message.id} className={youMeClass}>
+      <div key={message.id} className={messageClass}>
         <span className={userNameClass}>{message.user}:</span>{message.text}
       </div>
     )

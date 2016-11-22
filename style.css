@@ -48,12 +48,32 @@ html {
   width: 75%;
 }
 
+@keyframes otherNewMessage {
+  from {transform: translateX(-120%);}
+  to {transform: translateX(0%);}
+}
+
+@keyframes selfNewMessage {
+  from {transform: translateX(120%);}
+  to {transform: translateX(0%);}
+}
+
 .self {
   float: right;
 }
 
+.self.newest {
+  animation-name: selfNewMessage;
+    animation-duration: 1s;
+}
+
 .other {
   float: left;
+}
+
+.other.newest {
+  animation-name: otherNewMessage;
+    animation-duration: 1s;
 }
 
 .user-name-show {
