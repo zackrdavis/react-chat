@@ -9,14 +9,14 @@ const MessageList = ({sender, state}) => {
   let typingClass = typing && typing !== sender ? 'elipses typing' : 'elipses'
 
   const list = messages.map((message) => {
-    return (<li key={message.id}>{message.sender} {message.text}</li>)
+    return (<div key={message.id}>{message.sender} {message.text}</div>)
   });
 
   return (
-    <ul>
+    <div className="message-list">
       {list}
-      <li className={typingClass}>...</li>
-    </ul>
+      <div className={typingClass}>...</div>
+    </div>
   );
 }
 
@@ -29,7 +29,7 @@ const MessageForm = ({sendMessage, sendTyping, sender}) => {
   }
 
   return (
-    <div>
+    <div className="message-form">
       <input onChange={handleChange} ref={node => {
         input = node;
       }} />
@@ -46,9 +46,9 @@ const MessageForm = ({sendMessage, sendTyping, sender}) => {
 // single-user chat window
 const ChatWindow = ({sender, sendMessage, sendTyping, state}) => {
   return (
-    <div className="chat-window">
-      <div className="inner">
-        <div>{sender}</div>
+    <div className="chat-outer">
+      <div className="chat-inner">
+        <div className="chat-header">{sender}</div>
         <MessageList sender={sender} state={state} />
         <MessageForm sendMessage={sendMessage} sendTyping={sendTyping} sender={sender} />
       </div>
