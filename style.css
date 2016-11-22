@@ -33,18 +33,40 @@ html {
 
 .chat-header {
   flex: 0 1 auto;
-  padding: 15px;
+  padding: 10px;
   border-bottom: 2px solid orange;
 }
 
 .message-list {
   flex: 1 1 auto;
-  padding: 15px;
+  padding: 10px 10px 0 10px;
   overflow: auto;
 }
 
+.message {
+  margin-bottom: 20px;
+  width: 75%;
+}
+
+.self {
+  float: right;
+}
+
+.other {
+  float: left;
+}
+
+.user-name-show {
+  color: blue;
+  margin-right: 15px;
+}
+
+.user-name-hide {
+  display: none;
+}
+
 .message-form {
-  padding: 15px;
+  padding: 10px 10px 0 10px;
 }
 
 .message-form-inner {
@@ -76,7 +98,14 @@ button {
 
 .suggestion-list {
   flex: 0 1 25%;
-  padding: 15px;
+  padding: 10px;
+}
+
+.suggestion-list > div {
+  border: 2px solid blue;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
 }
 
 .elipses {

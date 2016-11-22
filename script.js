@@ -5,11 +5,26 @@ const MessageList = ({user, state}) => {
   let messages = state.messages;
   let typing = state.typing;
 
-  // classname for final li
-  let typingClass = typing && typing !== user ? 'elipses typing' : 'elipses'
+  // show or hide elipses
+  let typingClass = typing && typing !== user ? 'elipses typing' : 'elipses';
 
   const list = messages.map((message) => {
-    return (<div key={message.id}>{message.user} {message.text}</div>)
+    // left or right side depending on sender/receiver
+    let youMeClass = user === message.user ? 'self message' : 'other message';
+
+    // hide username if they sent multiple messages in a row
+    let userNameClass;
+    if(messages[message.id - 1] && messages[message.id - 1].user === message.user) {
+      userNameClass = 'user-name-hide'
+    } else {
+      userNameClass = 'user-name-show'
+    }
+
+    return (
+      <div key={message.id} className={youMeClass}>
+        <span className={userNameClass}>{message.user}:</span>{message.text}
+      </div>
+    )
   });
 
   return (
@@ -47,11 +62,16 @@ const MessageForm = ({sendMessage, sendTyping, user}) => {
 }
 
 
-const SuggestionList = ({suggestions}) => {
+const SuggestionList = ({sendMessage, suggestions, user}) => {
   if(suggestions) {
     // build list
     const list = suggestions.map((suggestion) => {
-      return (<div>{suggestion}</div>)
+      return (
+        <div onClick={() => {
+          sendMessage(suggestion, user);
+          input.value = '';
+        }}>{suggestion}</div>
+      )
     });
 
     return (
@@ -76,7 +96,7 @@ const ChatWindow = ({user, sendMessage, sendTyping, state}) => {
         <div className="chat-header">{user}</div>
         <MessageList user={user} state={state} />
         <MessageForm sendMessage={sendMessage} sendTyping={sendTyping} user={user} />
-        <SuggestionList suggestions={state.suggestions[user]} />
+        <SuggestionList sendMessage={sendMessage} suggestions={state.suggestions[user]} user={user}/>
       </div>
     </div>
   )
