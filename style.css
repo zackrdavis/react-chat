@@ -123,3 +123,10 @@ button {
 .elipses.typing {
   opacity: 1;
 }
+
+@media screen and (max-width: 586px) {
+  /*adjust font for narrower screen*/
+  html {
+    font-size: 0.75px;
+  }
+}
