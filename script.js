@@ -189,7 +189,7 @@ const SuggestionList = ({sendMessage, suggestions, user}) => {
     )
   // else build empty list
   } else {
-    return (<div className="suggestion-list"></div>)
+    return (<div className="suggestion-list">No suggestions yet...</div>)
   }
 }
 
