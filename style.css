@@ -110,7 +110,9 @@ button {
 
 .elipses {
   opacity: 0;
-  transition: all 1s;
+  font-size: 30rem;
+  width: 75%;
+  float: left;
 }
 
 .elipses.typing {

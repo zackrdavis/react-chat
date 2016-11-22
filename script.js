@@ -63,28 +63,24 @@ const MessageForm = ({sendMessage, sendTyping, user}) => {
 
 
 const SuggestionList = ({sendMessage, suggestions, user}) => {
+  // build list if suggestions exist
   if(suggestions) {
-    // build list
     const list = suggestions.map((suggestion) => {
       return (
         <div onClick={() => {
           sendMessage(suggestion, user);
-          input.value = '';
         }}>{suggestion}</div>
       )
     });
-
     return (
       <div className="suggestion-list">
         {list}
       </div>
     )
-
+  // else build empty list
   } else {
     return (<div className="suggestion-list"></div>)
   }
-
-
 }
 
 
@@ -160,6 +156,16 @@ class ChatApp extends React.Component {
     }
   }
 
+  removeSentSuggestion(user, val) {
+    let userSuggestions = this.state.suggestions[user];
+
+    // if sent message matches a suggestion, remove the suggestion
+    if(userSuggestions && userSuggestions.indexOf(val) !== -1) {
+      userSuggestions.splice(userSuggestions.indexOf(val), 1);
+      this.setState({ suggestions: this.state.suggestions })
+    }
+  }
+
   sendMessage(val, user) {
     // Assemble message data
     const message = {user:user, text: val, id: id++}
@@ -169,6 +175,7 @@ class ChatApp extends React.Component {
     this.setState({messages: this.state.messages});
 
     this.triggerSuggestions(user, val)
+    this.removeSentSuggestion(user, val)
   }
 
   sendTyping(user) {
