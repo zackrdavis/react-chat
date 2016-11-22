@@ -91,6 +91,10 @@ input {
   border-radius: 5px;
 }
 
+input:focus{
+    outline: none;
+}
+
 button {
   flex: 0 1 50px;
   background-color: rgba(0,0,0,0);
@@ -111,7 +115,8 @@ button {
 
 .elipses {
   opacity: 0;
-  font-size: 30rem;
+  font-size: 40rem;
+  color: blue;
   width: 75%;
   float: left;
 }
