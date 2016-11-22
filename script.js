@@ -151,7 +151,6 @@ class ChatApp extends React.Component {
     // for all users other than sender, consult bot for responses
     for (let i = 0; i < users.length; i++) {
       if(users[i] !== sender) {
-        console.log(message);
         this.consultBot(users[i], message)
       }
     }
