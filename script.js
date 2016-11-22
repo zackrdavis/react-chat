@@ -45,14 +45,36 @@ const MessageForm = ({sendMessage, sendTyping, user}) => {
 }
 
 
+const SuggestionList = ({suggestions}) => {
+  if(suggestions) {
+    // build list
+    const list = suggestions.map((suggestion) => {
+      return (<div>{suggestion}</div>)
+    });
+
+    return (
+      <div className="suggestion-list">
+        {list}
+      </div>
+    )
+
+  } else {
+    return (<div className="suggestion-list"></div>)
+  }
+
+
+}
+
+
 // single-user chat window
-const ChatWindow = ({user, sendMessage, sendTyping, getSuggestions, state}) => {
+const ChatWindow = ({user, sendMessage, sendTyping, state}) => {
   return (
     <div className="chat-outer">
       <div className="chat-inner">
         <div className="chat-header">{user}</div>
         <MessageList user={user} state={state} />
         <MessageForm sendMessage={sendMessage} sendTyping={sendTyping} user={user} />
+        <SuggestionList suggestions={state.suggestions[user]} />
       </div>
     </div>
   )
@@ -85,10 +107,13 @@ class ChatApp extends React.Component {
   }
 
   consultBot(user, message) {
-    console.log(message);
-
     this.bot.ask(message, (err, response) => {
-      this.state.suggestions[user] = response;
+      this.state.suggestions[user] = []
+      // push the bot answer
+      this.state.suggestions[user].push(response);
+      // push another helpful answer
+      this.state.suggestions[user].push('One moment while I consult my manager...');
+      // set state
       this.setState({ suggestions: this.state.suggestions })
     });
 

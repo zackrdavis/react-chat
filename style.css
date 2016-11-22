@@ -22,7 +22,7 @@ html, body, #chat-app, #chat-app > div{
   box-shadow: 2px 2px 10px black;
 }
 
-.chat-header, .message-form {
+.chat-header, .message-form, .suggestion-list {
   flex: 0 1 auto;
 }
 
