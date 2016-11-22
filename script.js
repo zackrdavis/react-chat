@@ -46,10 +46,12 @@ const MessageForm = ({sendMessage, sendTyping, sender}) => {
 // single-user chat window
 const ChatWindow = ({sender, sendMessage, sendTyping, state}) => {
   return (
-    <div>
-      <div>{sender}</div>
-      <MessageList sender={sender} state={state} />
-      <MessageForm sendMessage={sendMessage} sendTyping={sendTyping} sender={sender} />
+    <div className="chat-window">
+      <div className="inner">
+        <div>{sender}</div>
+        <MessageList sender={sender} state={state} />
+        <MessageForm sendMessage={sendMessage} sendTyping={sendTyping} sender={sender} />
+      </div>
     </div>
   )
 }
