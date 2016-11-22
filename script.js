@@ -45,19 +45,20 @@ const MessageForm = ({sendMessage, sendTyping, user}) => {
   }
 
   return (
-    <div className="message-form">
+    <form className="message-form" onSubmit={() => {
+      event.preventDefault()
+      if(input.value) {
+        sendMessage(input.value, user);
+        input.value = '';
+      }
+    }}>
       <div className="message-form-inner">
         <input onChange={handleChange} ref={node => {
           input = node;
         }} />
-        <button onClick={() => {
-          sendMessage(input.value, user);
-          input.value = '';
-        }}>
-        +
-        </button>
+        <button type="submit">+</button>
       </div>
-    </div>
+    </form>
   )
 }
 
