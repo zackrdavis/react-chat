@@ -40,12 +40,17 @@ html {
 .message-list {
   flex: 1 1 auto;
   padding: 10px 10px 0 10px;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .message {
   margin-bottom: 20px;
   width: 75%;
+}
+
+.message.newest {
+  animation-duration: 0.5s;
 }
 
 @keyframes otherNewMessage {
@@ -64,7 +69,6 @@ html {
 
 .self.newest {
   animation-name: selfNewMessage;
-    animation-duration: 1s;
 }
 
 .other {
@@ -73,7 +77,6 @@ html {
 
 .other.newest {
   animation-name: otherNewMessage;
-    animation-duration: 1s;
 }
 
 .user-name-show {
